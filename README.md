@@ -1,7 +1,7 @@
 # BT-Speaker
 
 A simple Bluetooth Speaker Daemon designed for the Raspberry Pi 3.
-This is a fork of (https://github.com/lukasjapan/bt-speaker/blob/master/install.sh).
+This is a fork of (https://github.com/lukasjapan/bt-speaker/blob/master/install.sh) with pulseaudio, added pin configuration, added startup command and new sounds. Testen on debian buster raspbian.
 
 
 ## Installation
@@ -10,10 +10,10 @@ Quick Installation for Raspbian:
 
 ```bash
 sudo -i
-bash <(curl -s https://raw.githubusercontent.com/nuthub/bt-speaker/master/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/bkrnkfr/bt-speaker/master/install.sh)
 ```
 
-For details refer to the comments in the [install script](https://github.com/nuthub/bt-speaker/blob/master/install.sh).
+For details refer to the comments in the [install script](https://github.com/brknkfr/bt-speaker/blob/master/install.sh).
 
 Depending on your application, you might also want to send all audio to the headphone jack.
 This can be done by `raspi-config`:
@@ -45,10 +45,6 @@ bt_speaker | connect_command | /etc/bt_speaker/hooks/connect | Command that is c
 bt_speaker | disconnect_command | /etc/bt_speaker/hooks/disconnect | Command that is called when an audio device disconnects from BT-Speaker
 bluez | device_path | /org/bluez/hci0 | The DBUS path where BT-Speaker can find the bluetooth device
 bluez | discoverable | yes | Specifies if the raspberry pi should advertise itself if no client is connected.
-alsa | enabled | yes | Enables volume control via alsamixer
-alsa | mixer | PCM | The volume of this mixer will be set from AVRCP messages (Remote volume control)
-alsa | id | 0 | The alsa id of the mixer control
-alsa | cardindex | 0 | The alsa cardindex of the soundcard
 
 The settings in the alsa section specify on which alsa mixer ([more info here](https://larsimmisch.github.io/pyalsaaudio/libalsaaudio.html#mixer-objects)) volume changes are applied.
 You need to adjust these settings if you are using an external sound card.
@@ -60,16 +56,16 @@ It talks to the Bluez daemon via the [Bluez DBUS interface](https://git.kernel.o
 
 ### Bluetooth profiles
 
-BT-Speaker will register itself as an [A2DP](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Advanced_Audio_Distribution_Profile_.28A2DP.29) capable device and route the received audio fully decoded to ALSAs `aplay` command.
+BT-Speaker will register itself as an [A2DP](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Advanced_Audio_Distribution_Profile_.28A2DP.29) capable device and route the received audio.
 
-Changes in volume are detected via messages from the [AVRCP](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Audio.2FVideo_Remote_Control_Profile_.28AVRCP.29) profile and are applied directly to the ALSA master volume.
+Changes in volume are detected via messages from the [AVRCP](https://en.wikipedia.org/wiki/List_of_Bluetooth_profiles#Audio.2FVideo_Remote_Control_Profile_.28AVRCP.29) profile and are applied directly.
 
 ### Bluetooth device class
 
-Some devices may filter out BT-Speaker and require the bluetooth device class to be expicitly set. Although BT-Speaker does not support to change the device class itself, you can change it manually after launching BT-Speaker.
+Some devices may filter out BT-Speaker and require the bluetooth device class to be expicitly set. Although BT-Speaker does not support to change the device class itself, you can change it manually after launching BT-Speaker. Explicitly set following class for best compatibility in /etc/bluetooth/main.conf.
 
 ```ini
-pi@raspberrypi:~ $ sudo hciconfig hci0 class 0x240408
+Class = 0x41C
 ```
 
 More about Bluetooth device classes can be found ([here](http://bluetooth-pentest.narod.ru/software/bluetooth_class_of_device-service_generator.html))
