@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-paplay sounds/connected.wav
+paplay /opt/bt-speaker/sounds/connected.wav
 
 # disconnect wifi to prevent dropouts - TODO: check what permissions bt-speaker might need for this (netdev group?)
 # ifconfig wlan0 down &

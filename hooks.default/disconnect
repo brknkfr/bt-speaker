@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-paplay sounds/disconnected.wav
+paplay /opt/bt-speaker/sounds/disconnected.wav
 
 # reenable wifi - TODO: check what permissions bt-speaker might need for this (netdev group?)
 # ifconfig wlan0 up &
