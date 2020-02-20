@@ -100,8 +100,6 @@ def setup_bt():
     def disconnect():
         subprocess.Popen(config.get('bt_speaker', 'disconnect_command'), shell=True).communicate()
 
-
-
     # setup bluetooth agent (that manages connections of devices)
     agent = AutoAcceptSingleAudioAgent(connect, disconnect)
     manager = BTAgentManager()
