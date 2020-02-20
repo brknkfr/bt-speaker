@@ -91,6 +91,9 @@ def setup_bt():
     # start pulseaudio daemonize
     subprocess.Popen(config.get('pulseaudio', 'start_command'), shell=True).communicate()
 
+    def startup():
+        subprocess.Popen(config.get('bt_speaker', 'connect_command'), shell=True).communicate()
+
     def connect():
         subprocess.Popen(config.get('bt_speaker', 'connect_command'), shell=True).communicate()
 
@@ -105,7 +108,7 @@ def setup_bt():
     manager.register_agent(agent._path, "NoInputNoOutput")
     manager.request_default_agent(agent._path)
 
-    disconnect()
+    startup()
 
 def run():
     # Initialize the DBus SystemBus
