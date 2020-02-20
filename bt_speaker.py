@@ -92,7 +92,7 @@ def setup_bt():
     subprocess.Popen(config.get('pulseaudio', 'start_command'), shell=True).communicate()
 
     def startup():
-        subprocess.Popen(config.get('bt_speaker', 'connect_command'), shell=True).communicate()
+        subprocess.Popen(config.get('bt_speaker', 'startup_command'), shell=True).communicate()
 
     def connect():
         subprocess.Popen(config.get('bt_speaker', 'connect_command'), shell=True).communicate()

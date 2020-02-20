@@ -9,4 +9,4 @@ device_path = /org/bluez/hci0
 discoverable = yes
 
 [pulseaudio]
-start_command = /usr/bin/pulseaudio --daemonize=on --start --exit-idle-time=-1
+start_command = /usr/bin/pulseaudio --daemonize=on --start --exit-idle-time=-1 --resample-method=copy
