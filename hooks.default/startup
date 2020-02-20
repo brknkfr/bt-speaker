@@ -5,9 +5,15 @@
 # Disable simple secure pairing
 btmgmt ssp off
 
-espeak-ng 'bluetooth ready.
-pin code is
-1
-2
-3
-4'
+# Tell that bluetooth is readyy
+espeak-ng -s 120 'bluetooth ready.
+pin code is'
+
+# Get configured PIN
+PIN=$(awk -F "=" '/pin_code/ {print $2}' /etc/bt_speaker/config.ini | sed 's/ //g')
+
+# Tell PIN code
+for (( i=0; i<${#PIN}; i++ )); do
+  echo "${PIN:$i:1}"
+  espeak-ng -s 120 "${foo:$i:1}"
+done

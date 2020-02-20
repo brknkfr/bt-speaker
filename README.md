@@ -1,7 +1,7 @@
 # BT-Speaker
 
 A simple Bluetooth Speaker Daemon designed for the Raspberry Pi 3.
-This is a fork of (https://github.com/lukasjapan/bt-speaker/blob/master/install.sh) with pulseaudio, added pin configuration, added startup command and new sounds. Testen on debian buster raspbian.
+This is a fork of (https://github.com/lukasjapan/bt-speaker/blob/master/install.sh) with added stuff: pulseaudio, pin configuration, startup command and new sounds. Testen on debian buster raspbian.
 
 
 ## Installation
@@ -10,7 +10,7 @@ Quick Installation for Raspbian:
 
 ```bash
 sudo -i
-bash <(curl -s https://raw.githubusercontent.com/bkrnkfr/bt-speaker/raw/master/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/brknkfr/bt-speaker/master/install.sh)
 ```
 
 For details refer to the comments in the [install script](https://github.com/brknkfr/bt-speaker/blob/master/install.sh).
@@ -40,7 +40,7 @@ The default settings of BT-Speaker will be copied and can be overridden in `/etc
 
 Section | Key | Default Value | Description
 ------------ | ------------- | ------------- | -------------
-bt_speaker | play_command | aplay -f cd - | The raw audio in CD Format (16bit little endian, 44100Hz, stereo) is piped to this command.
+bt_speaker | startup_command | /etc/bt_speaker/hooks/startup | Command that is called when an bluetooth device is set up and bt_speaker is started
 bt_speaker | connect_command | /etc/bt_speaker/hooks/connect | Command that is called when an audio device connects to BT-Speaker
 bt_speaker | disconnect_command | /etc/bt_speaker/hooks/disconnect | Command that is called when an audio device disconnects from BT-Speaker
 bluez | device_path | /org/bluez/hci0 | The DBUS path where BT-Speaker can find the bluetooth device
